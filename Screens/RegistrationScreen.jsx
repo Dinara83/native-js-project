@@ -133,12 +133,15 @@ const RegistrationScreen = () => {
                 />
                 <Text style={styles.textPassword}>Показать</Text>
               </View>
+
               <TouchableOpacity activeOpacity={0.9} style={styles.button}>
                 <Text style={styles.btnTitle}>Зарегистрироваться</Text>
               </TouchableOpacity>
+
               <TouchableOpacity activeOpacity={0.9} style={styles.btnQwastions}>
                 <Text style={styles.btnQW}>Уже есть аккаунт? Войти</Text>
               </TouchableOpacity>
+			  
             </View>
           </KeyboardAvoidingView>
         </ImageBackground>
