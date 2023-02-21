@@ -76,15 +76,15 @@ const LoginScreen = () => {
                   style={{
                     ...styles.input,
                     marginTop: 16,
-					borderColor:
-					isTextInputFocused == true ? `#FF6C00` : `#E8E8E8`,
+                    borderColor:
+                      isTextInputFocused == true ? `#FF6C00` : `#E8E8E8`,
                   }}
                   placeholder="Адрес электронной почты"
                   value={state.email}
                   onChangeText={(value) =>
                     setState((prevState) => ({ ...prevState, email: value }))
                   }
-				  onFocus={() => setTextInputFocused(true)}
+                  onFocus={() => setTextInputFocused(true)}
                   onSubmitEditing={() => setTextInputFocused(true)}
                   onEndEditing={() => setTextInputFocused(false)}
                   keyboardType="email-address"
@@ -97,8 +97,8 @@ const LoginScreen = () => {
                   style={{
                     ...styles.input,
                     marginTop: 16,
-					borderColor:
-					isTextInputFocused == true ? `#FF6C00` : `#E8E8E8`,
+                    borderColor:
+                      isTextInputFocused == true ? `#FF6C00` : `#E8E8E8`,
                   }}
                   secureTextEntry={true}
                   placeholder="Пароль"
@@ -109,21 +109,22 @@ const LoginScreen = () => {
                       password: value,
                     }))
                   }
-				  onFocus={() => setTextInputFocused(true)}
+                  onFocus={() => setTextInputFocused(true)}
                   onSubmitEditing={() => setTextInputFocused(true)}
                   onEndEditing={() => setTextInputFocused(false)}
                 />
                 <Text style={styles.textPassword}>Показать</Text>
               </View>
 
-			  <TouchableOpacity activeOpacity={0.9} style={styles.button}>
+              <TouchableOpacity activeOpacity={0.9} style={styles.button}>
                 <Text style={styles.btnTitle}>Войти</Text>
               </TouchableOpacity>
 
               <TouchableOpacity activeOpacity={0.9} style={styles.btnQwastions}>
-                <Text style={styles.btnQW}>Нет аккаунта? Зарегистрироваться</Text>
+                <Text style={styles.btnQW}>
+                  Нет аккаунта? Зарегистрироваться
+                </Text>
               </TouchableOpacity>
-
             </View>
           </KeyboardAvoidingView>
         </ImageBackground>
@@ -224,7 +225,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 19,
     color: `#1B4371`,
-	paddingBottom: 0,
+    paddingBottom: 0,
   },
 });
 

@@ -141,7 +141,6 @@ const RegistrationScreen = () => {
               <TouchableOpacity activeOpacity={0.9} style={styles.btnQwastions}>
                 <Text style={styles.btnQW}>Уже есть аккаунт? Войти</Text>
               </TouchableOpacity>
-			  
             </View>
           </KeyboardAvoidingView>
         </ImageBackground>
@@ -274,7 +273,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 19,
     color: `#1B4371`,
-	paddingBottom: 0,
+    paddingBottom: 0,
   },
 });
 
