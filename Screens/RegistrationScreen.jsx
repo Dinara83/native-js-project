@@ -28,12 +28,13 @@ SplashScreen.preventAutoHideAsync();
 const RegistrationScreen = () => {
   const [state, setState] = useState(initialState);
   const [isShowKeyBoard, setIsShowKeyBoard] = useState(false);
+  const [isTextInputFocused, setTextInputFocused] = useState(false);
+
   const image = "../images/photo-bg.jpg";
 
   const keyBoardHide = () => {
     setIsShowKeyBoard(false);
     Keyboard.dismiss();
-    setState(initialState);
   };
 
   const newLocalRobotoRegular = "../fonts/Roboto-Regular.ttf";
@@ -64,7 +65,7 @@ const RegistrationScreen = () => {
             behavior={Platform.OS == "ios" ? "padding" : "height"}
           >
             <View
-              style={{ ...styles.form, marginBottom: isShowKeyBoard ? 20 : 0 }}
+              style={{ ...styles.form, marginBottom: isShowKeyBoard ? 0 : 74 }}
             >
               <View style={styles.wrapperImgstyle}>
                 <View style={styles.ellipse}>
@@ -75,61 +76,69 @@ const RegistrationScreen = () => {
                 </View>
                 <Image source={require("../images/add-photo.png")} />
               </View>
-              <View style={styles.inner}>
-                <View style={styles.header}>
-                  <Text style={styles.headerTitle}>Регистрация</Text>
-                </View>
-                <View>
-                  <TextInput
-                    style={styles.input}
-                    placeholder="Логин"
-                    value={state.login}
-                    onChangeText={(value) =>
-                      setState((prevState) => ({ ...prevState, login: value }))
-                    }
-                    onFocus={() => setIsShowKeyBoard(true)}
-					autoCapitalize="words"
-                  />
-                </View>
-                <View style={{ marginTop: 16 }}>
-                  <TextInput
-                    style={styles.input}
-                    placeholder="Адрес электронной почты"
-                    value={state.email}
-                    onChangeText={(value) =>
-                      setState((prevState) => ({ ...prevState, email: value }))
-                    }
-                    onFocus={() => setIsShowKeyBoard(true)}
-					keyboardType="email-address"
-                  />
-                </View>
-                <View style={{ marginTop: 16 }}>
-                  <TextInput
-                    style={styles.input}
-                    secureTextEntry={true}
-                    placeholder="Пароль"
-					placeholderTextColor={`#FF6C00`}
-                    value={state.password}
-                    onChangeText={(value) =>
-                      setState((prevState) => ({
-                        ...prevState,
-                        password: value,
-                      }))
-                    }
-                    onFocus={() => setIsShowKeyBoard(true)}
-                  />
-                  <Text style={styles.textPassword}>Показать</Text>
-                </View>
-                <TouchableOpacity activeOpacity={0.9} style={styles.button}>
-                  <Text style={styles.btnTitle}>Зарегистрироваться</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  activeOpacity={0.9}
-                  style={styles.btnQwastions}
-                >
-                  <Text style={styles.btnQW}>Уже есть аккаунт? Войти</Text>
-                </TouchableOpacity>
+              <View style={styles.header}>
+                <Text style={styles.headerTitle}>Регистрация</Text>
               </View>
+              <View>
+                <TextInput
+                  onFocus={() => setIsShowKeyBoard(true)}
+                  style={{
+                    ...styles.input,
+                    borderColor:
+                      isTextInputFocused == true ? `#FF6C00` : `#E8E8E8`,
+                  }}
+                  placeholder="Логин"
+                  value={state.login}
+                  onChangeText={(value) =>
+                    setState((prevState) => ({ ...prevState, login: value }))
+                  }
+                  onFocus={() => setTextInputFocused(true)}
+                  onSubmitEditing={() => setTextInputFocused(true)}
+                  onEndEditing={() => setTextInputFocused(false)}
+                />
+              </View>
+
+              <View>
+                <TextInput
+                  onFocus={() => setIsShowKeyBoard(true)}
+                  style={{
+                    ...styles.input,
+                    marginTop: 16,
+                  }}
+                  placeholder="Адрес электронной почты"
+                  value={state.email}
+                  onChangeText={(value) =>
+                    setState((prevState) => ({ ...prevState, email: value }))
+                  }
+                  keyboardType="email-address"
+                />
+              </View>
+
+              <View>
+                <TextInput
+                  onFocus={() => setIsShowKeyBoard(true)}
+                  style={{
+                    ...styles.input,
+                    marginTop: 16,
+                  }}
+                  secureTextEntry={true}
+                  placeholder="Пароль"
+                  value={state.password}
+                  onChangeText={(value) =>
+                    setState((prevState) => ({
+                      ...prevState,
+                      password: value,
+                    }))
+                  }
+                />
+                <Text style={styles.textPassword}>Показать</Text>
+              </View>
+              <TouchableOpacity activeOpacity={0.9} style={styles.button}>
+                <Text style={styles.btnTitle}>Зарегистрироваться</Text>
+              </TouchableOpacity>
+              <TouchableOpacity activeOpacity={0.9} style={styles.btnQwastions}>
+                <Text style={styles.btnQW}>Уже есть аккаунт? Войти</Text>
+              </TouchableOpacity>
             </View>
           </KeyboardAvoidingView>
         </ImageBackground>
@@ -142,6 +151,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
+    marginBottom: 0,
   },
 
   image: {
@@ -156,9 +166,6 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 25,
     paddingTop: 60,
     height: 549,
-  },
-
-  inner: {
     paddingHorizontal: 16,
   },
 
@@ -209,12 +216,11 @@ const styles = StyleSheet.create({
   },
 
   input: {
-    borderWidth: 1,
     fontFamily: "Roboto-Regular",
     fontStyle: "normal",
     fontSize: 16,
     lineHeight: 19,
-    color: `#BDBDBD`,
+    color: `#212121`,
     borderWidth: 1,
     borderColor: `#E8E8E8`,
     borderRadius: 8,
@@ -230,9 +236,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 19,
     color: `#1B4371`,
-    top: `33%`,
+    top: `50%`,
     left: `75%`,
   },
+
   button: {
     paddingTop: 16,
     paddingBottom: 16,
@@ -244,19 +251,27 @@ const styles = StyleSheet.create({
     backgroundColor: `#ff6c00`,
     borderRadius: 100,
   },
+
   btnTitle: {
-    color: `#f0f8ff`,
+    fontFamily: "Roboto-Regular",
+    fontStyle: "normal",
     fontSize: 16,
+    lineHeight: 19,
+    color: `#FFFFFF`,
   },
+
   btnQwastions: {
     alignItems: "center",
     paddingTop: 16,
   },
+
   btnQW: {
     fontFamily: "Roboto-Regular",
+    fontStyle: "normal",
     fontSize: 16,
-    lineHeight: 18.75,
+    lineHeight: 19,
     color: `#1B4371`,
+	paddingBottom: 0,
   },
 });
 

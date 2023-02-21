@@ -1,13 +1,13 @@
 import React from "react";
 import { StatusBar } from "expo-status-bar";
 import RegistrationScreen from "./Screens/RegistrationScreen";
-// import LoginScreen from "./Screens/LoginScreen";
+import LoginScreen from "./Screens/LoginScreen";
 
 export default function App() {
   return (
     <>
       <RegistrationScreen />
-      {/* <LoginScreen /> */}
+      <LoginScreen />
       <StatusBar style="auto" />
     </>
   );
