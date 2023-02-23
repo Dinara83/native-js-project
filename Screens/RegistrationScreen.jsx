@@ -104,12 +104,17 @@ const RegistrationScreen = () => {
                   style={{
                     ...styles.input,
                     marginTop: 16,
+					borderColor:
+                      isTextInputFocused == true ? `#FF6C00` : `#E8E8E8`,
                   }}
                   placeholder="Адрес электронной почты"
                   value={state.email}
                   onChangeText={(value) =>
                     setState((prevState) => ({ ...prevState, email: value }))
                   }
+				  onFocus={() => setTextInputFocused(true)}
+                  onSubmitEditing={() => setTextInputFocused(true)}
+                  onEndEditing={() => setTextInputFocused(false)}
                   keyboardType="email-address"
                 />
               </View>
@@ -120,6 +125,8 @@ const RegistrationScreen = () => {
                   style={{
                     ...styles.input,
                     marginTop: 16,
+					borderColor:
+                      isTextInputFocused == true ? `#FF6C00` : `#E8E8E8`,
                   }}
                   secureTextEntry={true}
                   placeholder="Пароль"
@@ -130,6 +137,9 @@ const RegistrationScreen = () => {
                       password: value,
                     }))
                   }
+				  onFocus={() => setTextInputFocused(true)}
+                  onSubmitEditing={() => setTextInputFocused(true)}
+                  onEndEditing={() => setTextInputFocused(false)}
                 />
                 <Text style={styles.textPassword}>Показать</Text>
               </View>
