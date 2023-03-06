@@ -25,11 +25,7 @@ SplashScreen.preventAutoHideAsync();
 
 const RegistrationScreen = () => {
   const [state, setState] = useState(initialState);
-  const [isShowKeyBoard, setIsShowKeyBoard] = useState({
-    login: false,
-    email: false,
-    password: false,
-  });
+  const [isShowKeyBoard, setIsShowKeyBoard] = useState(true);
   const [isTextInputLogin, setTextInputLogin] = useState(false);
   const [isTextInputPassword, setTextInputPassword] = useState(false);
   const [isTextInputEmail, setTextInputEmail] = useState(false);
@@ -42,20 +38,12 @@ const RegistrationScreen = () => {
   //   });
 
   const keyBoardHide = () => {
-    setIsShowKeyBoard({
-      login: true,
-      email: true,
-      password: true,
-    });
+    setIsShowKeyBoard(true);
     Keyboard.dismiss();
   };
 
   const handleRegistration = () => {
-    setIsShowKeyBoard({
-      login: true,
-      email: true,
-      password: true,
-    });
+    setIsShowKeyBoard(true);
     Keyboard.dismiss();
     console.log(state);
     setState(initialState);
@@ -91,12 +79,7 @@ const RegistrationScreen = () => {
           <View
             style={{
               ...styles.form,
-              paddingBottom:
-                isShowKeyBoard.login ||
-                isShowKeyBoard.email ||
-                isShowKeyBoard.password
-                  ? 46
-                  : 0,
+              marginBottom: !isShowKeyBoard ? 30 : 0
             }}
           >
             <View style={styles.wrapperImgstyle}>
@@ -117,7 +100,6 @@ const RegistrationScreen = () => {
             </View>
             <View>
               <TextInput
-                //   onFocus={() => setIsShowKeyBoard(true)}
                 style={{
                   ...styles.input,
                   borderColor: isTextInputLogin == true ? `#FF6C00` : `#E8E8E8`,
@@ -129,7 +111,7 @@ const RegistrationScreen = () => {
                 }
                 onFocus={() => {
                   setTextInputLogin(true);
-                  setIsShowKeyBoard({ ...isShowKeyBoard, login: true });
+                  setIsShowKeyBoard(true);
                 }}
                 onSubmitEditing={() => setTextInputLogin(true)}
                 onEndEditing={() => setTextInputLogin(false)}
@@ -138,7 +120,6 @@ const RegistrationScreen = () => {
 
             <View>
               <TextInput
-                //   onFocus={() => setIsShowKeyBoard(true)}
                 style={{
                   ...styles.input,
                   marginTop: 16,
@@ -150,18 +131,17 @@ const RegistrationScreen = () => {
                   setState((prevState) => ({ ...prevState, email: value }))
                 }
                 onFocus={() => {
-                  setTextInputLogin(true);
-                  setIsShowKeyBoard({ ...isShowKeyBoard, login: true });
+                  setTextInputEmail(true);
+                  setIsShowKeyBoard(true);
                 }}
                 onSubmitEditing={() => setTextInputEmail(true)}
                 onEndEditing={() => setTextInputEmail(false)}
-                //   keyboardType="email-address"
+                  keyboardType="email-address"
               />
             </View>
 
             <View style={styles.inputContainer}>
               <TextInput
-                //   onFocus={() => setIsShowKeyBoard(true)}
                 style={{
                   ...styles.input,
                   marginTop: 16,
@@ -178,8 +158,8 @@ const RegistrationScreen = () => {
                   }))
                 }
                 onFocus={() => {
-                  setTextInputLogin(true);
-                  setIsShowKeyBoard({ ...isShowKeyBoard, login: true });
+                  setTextInputPassword(true);
+                  setIsShowKeyBoard(true);
                 }}
                 onSubmitEditing={() => setTextInputPassword(true)}
                 onEndEditing={() => setTextInputPassword(false)}
