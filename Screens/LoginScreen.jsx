@@ -8,7 +8,6 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView,
   Platform,
-  ImageBackground,
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
@@ -27,8 +26,6 @@ const LoginScreen = () => {
   const [state, setState] = useState(initialState);
   const [isShowKeyBoard, setIsShowKeyBoard] = useState(false);
   const [isTextInputFocused, setTextInputFocused] = useState(false);
-
-  const image = "../images/photo-bg.jpg";
 
   const keyBoardHide = () => {
     setIsShowKeyBoard(false);
@@ -58,7 +55,6 @@ const LoginScreen = () => {
   return (
     <TouchableWithoutFeedback onPress={keyBoardHide}>
       <View style={styles.container} onLayout={onLayoutRootView}>
-        <ImageBackground source={require(image)} style={styles.image}>
           <KeyboardAvoidingView
             behavior={Platform.OS == "ios" ? "padding" : "height"}
           >
@@ -126,7 +122,6 @@ const LoginScreen = () => {
               </TouchableOpacity>
             </View>
           </KeyboardAvoidingView>
-        </ImageBackground>
       </View>
     </TouchableWithoutFeedback>
   );
@@ -135,14 +130,7 @@ const LoginScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
     marginBottom: 0,
-  },
-
-  image: {
-    flex: 1,
-    resizeMode: "cover",
-    justifyContent: "flex-end",
   },
 
   form: {

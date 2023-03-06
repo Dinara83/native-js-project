@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React, { useState, useCallback } from "react";
 import {
   StyleSheet,
@@ -9,7 +8,6 @@ import {
   KeyboardAvoidingView,
   Platform,
   Image,
-  ImageBackground,
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
@@ -27,14 +25,40 @@ SplashScreen.preventAutoHideAsync();
 
 const RegistrationScreen = () => {
   const [state, setState] = useState(initialState);
-  const [isShowKeyBoard, setIsShowKeyBoard] = useState(false);
-  const [isTextInputFocused, setTextInputFocused] = useState(false);
+  const [isShowKeyBoard, setIsShowKeyBoard] = useState({
+    login: false,
+    email: false,
+    password: false,
+  });
+  const [isTextInputLogin, setTextInputLogin] = useState(false);
+  const [isTextInputPassword, setTextInputPassword] = useState(false);
+  const [isTextInputEmail, setTextInputEmail] = useState(false);
+  const [showPassword, setShowPassword] = useState(true);
 
-  const image = "../images/photo-bg.jpg";
+  //   const [isFocus, setIsFocus] = useState({
+  //     login: false,
+  //     email: false,
+  //     password: false,
+  //   });
 
   const keyBoardHide = () => {
-    setIsShowKeyBoard(false);
+    setIsShowKeyBoard({
+      login: true,
+      email: true,
+      password: true,
+    });
     Keyboard.dismiss();
+  };
+
+  const handleRegistration = () => {
+    setIsShowKeyBoard({
+      login: true,
+      email: true,
+      password: true,
+    });
+    Keyboard.dismiss();
+    console.log(state);
+    setState(initialState);
   };
 
   const newLocalRobotoRegular = "../fonts/Roboto-Regular.ttf";
@@ -58,117 +82,138 @@ const RegistrationScreen = () => {
   }
 
   return (
-    <TouchableWithoutFeedback onPress={keyBoardHide}>
-      <View style={styles.container} onLayout={onLayoutRootView}>
-        <ImageBackground source={require(image)} style={styles.image}>
-          <KeyboardAvoidingView
-            behavior={Platform.OS == "ios" ? "padding" : "height"}
+    <View style={styles.container}>
+      <TouchableWithoutFeedback onPress={keyBoardHide}>
+        <KeyboardAvoidingView
+          behavior={Platform.OS == "ios" ? "padding" : "height"}
+          onLayout={onLayoutRootView}
+        >
+          <View
+            style={{
+              ...styles.form,
+              paddingBottom:
+                isShowKeyBoard.login ||
+                isShowKeyBoard.email ||
+                isShowKeyBoard.password
+                  ? 46
+                  : 0,
+            }}
           >
-            <View
-              style={{ ...styles.form, marginBottom: isShowKeyBoard ? 0 : 74 }}
-            >
-              <View style={styles.wrapperImgstyle}>
-                <View style={styles.ellipse}>
-                  <Image
-                    style={styles.imgPlus}
-                    source={require("../images/union.png")}
-                  />
-                </View>
-                <Image source={require("../images/add-photo.png")} />
-              </View>
-              <View style={styles.header}>
-                <Text style={styles.headerTitle}>Регистрация</Text>
-              </View>
-              <View>
-                <TextInput
-                  onFocus={() => setIsShowKeyBoard(true)}
-                  style={{
-                    ...styles.input,
-                    borderColor:
-                      isTextInputFocused == true ? `#FF6C00` : `#E8E8E8`,
-                  }}
-                  placeholder="Логин"
-                  value={state.login}
-                  onChangeText={(value) =>
-                    setState((prevState) => ({ ...prevState, login: value }))
-                  }
-                  onFocus={() => setTextInputFocused(true)}
-                  onSubmitEditing={() => setTextInputFocused(true)}
-                  onEndEditing={() => setTextInputFocused(false)}
+            <View style={styles.wrapperImgstyle}>
+              <View style={styles.ellipse}>
+                <Image
+                  style={styles.imgPlus}
+                  // @ts-ignore
+                  source={require("../assets/images/union.png")}
                 />
               </View>
+              <Image
+                source={require(// @ts-ignore
+                "../assets/images/add-photo.png")}
+              />
+            </View>
+            <View style={styles.header}>
+              <Text style={styles.headerTitle}>Регистрация</Text>
+            </View>
+            <View>
+              <TextInput
+                //   onFocus={() => setIsShowKeyBoard(true)}
+                style={{
+                  ...styles.input,
+                  borderColor: isTextInputLogin == true ? `#FF6C00` : `#E8E8E8`,
+                }}
+                placeholder="Логин"
+                value={state.login}
+                onChangeText={(value) =>
+                  setState((prevState) => ({ ...prevState, login: value }))
+                }
+                onFocus={() => {
+                  setTextInputLogin(true);
+                  setIsShowKeyBoard({ ...isShowKeyBoard, login: true });
+                }}
+                onSubmitEditing={() => setTextInputLogin(true)}
+                onEndEditing={() => setTextInputLogin(false)}
+              />
+            </View>
 
-              <View>
-                <TextInput
-                  onFocus={() => setIsShowKeyBoard(true)}
-                  style={{
-                    ...styles.input,
-                    marginTop: 16,
-					borderColor:
-                      isTextInputFocused == true ? `#FF6C00` : `#E8E8E8`,
-                  }}
-                  placeholder="Адрес электронной почты"
-                  value={state.email}
-                  onChangeText={(value) =>
-                    setState((prevState) => ({ ...prevState, email: value }))
-                  }
-				  onFocus={() => setTextInputFocused(true)}
-                  onSubmitEditing={() => setTextInputFocused(true)}
-                  onEndEditing={() => setTextInputFocused(false)}
-                  keyboardType="email-address"
-                />
-              </View>
+            <View>
+              <TextInput
+                //   onFocus={() => setIsShowKeyBoard(true)}
+                style={{
+                  ...styles.input,
+                  marginTop: 16,
+                  borderColor: isTextInputEmail == true ? `#FF6C00` : `#E8E8E8`,
+                }}
+                placeholder="Адрес электронной почты"
+                value={state.email}
+                onChangeText={(value) =>
+                  setState((prevState) => ({ ...prevState, email: value }))
+                }
+                onFocus={() => {
+                  setTextInputLogin(true);
+                  setIsShowKeyBoard({ ...isShowKeyBoard, login: true });
+                }}
+                onSubmitEditing={() => setTextInputEmail(true)}
+                onEndEditing={() => setTextInputEmail(false)}
+                //   keyboardType="email-address"
+              />
+            </View>
 
-              <View>
-                <TextInput
-                  onFocus={() => setIsShowKeyBoard(true)}
-                  style={{
-                    ...styles.input,
-                    marginTop: 16,
-					borderColor:
-                      isTextInputFocused == true ? `#FF6C00` : `#E8E8E8`,
-                  }}
-                  secureTextEntry={true}
-                  placeholder="Пароль"
-                  value={state.password}
-                  onChangeText={(value) =>
-                    setState((prevState) => ({
-                      ...prevState,
-                      password: value,
-                    }))
-                  }
-				  onFocus={() => setTextInputFocused(true)}
-                  onSubmitEditing={() => setTextInputFocused(true)}
-                  onEndEditing={() => setTextInputFocused(false)}
-                />
-                <Text style={styles.textPassword}>Показать</Text>
-              </View>
+            <View style={styles.inputContainer}>
+              <TextInput
+                //   onFocus={() => setIsShowKeyBoard(true)}
+                style={{
+                  ...styles.input,
+                  marginTop: 16,
+                  borderColor:
+                    isTextInputPassword == true ? `#FF6C00` : `#E8E8E8`,
+                }}
+                secureTextEntry={showPassword}
+                placeholder="Пароль"
+                value={state.password}
+                onChangeText={(value) =>
+                  setState((prevState) => ({
+                    ...prevState,
+                    password: value,
+                  }))
+                }
+                onFocus={() => {
+                  setTextInputLogin(true);
+                  setIsShowKeyBoard({ ...isShowKeyBoard, login: true });
+                }}
+                onSubmitEditing={() => setTextInputPassword(true)}
+                onEndEditing={() => setTextInputPassword(false)}
+              />
 
-              <TouchableOpacity activeOpacity={0.9} style={styles.button}>
-                <Text style={styles.btnTitle}>Зарегистрироваться</Text>
-              </TouchableOpacity>
-
-              <TouchableOpacity activeOpacity={0.9} style={styles.btnQwastions}>
-                <Text style={styles.btnQW}>Уже есть аккаунт? Войти</Text>
+              <TouchableOpacity
+                style={styles.textPassword}
+                onPressIn={() => setShowPassword(false)}
+                onPressOut={() => setShowPassword(true)}
+              >
+                <Text>Показать</Text>
               </TouchableOpacity>
             </View>
-          </KeyboardAvoidingView>
-        </ImageBackground>
-      </View>
-    </TouchableWithoutFeedback>
+            <TouchableOpacity
+              activeOpacity={0.9}
+              style={styles.button}
+              onPress={handleRegistration}
+            >
+              <Text style={styles.btnTitle}>Зарегистрироваться</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity activeOpacity={0.9} style={styles.btnQwastions}>
+              <Text style={styles.btnQW}>Уже есть аккаунт? Войти</Text>
+            </TouchableOpacity>
+          </View>
+        </KeyboardAvoidingView>
+      </TouchableWithoutFeedback>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    marginBottom: 0,
-  },
-
-  image: {
-    flex: 1,
-    resizeMode: "cover",
     justifyContent: "flex-end",
   },
 
@@ -241,6 +286,11 @@ const styles = StyleSheet.create({
     backgroundColor: `#F6F6F6`,
   },
 
+  inputContainer: {
+    position: "relative",
+    color: "#1B4371",
+  },
+
   textPassword: {
     position: "absolute",
     fontFamily: "Roboto-Regular",
@@ -248,6 +298,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 19,
     color: `#1B4371`,
+    textAlign: "center",
     top: `50%`,
     left: `75%`,
   },
@@ -283,7 +334,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 19,
     color: `#1B4371`,
-    paddingBottom: 0,
+    // paddingBottom: 0,
   },
 });
 
