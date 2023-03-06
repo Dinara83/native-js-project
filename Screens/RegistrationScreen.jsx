@@ -25,10 +25,10 @@ SplashScreen.preventAutoHideAsync();
 
 const RegistrationScreen = () => {
   const [state, setState] = useState(initialState);
-  const [isShowKeyBoard, setIsShowKeyBoard] = useState(true);
+  const [isShowKeyBoard, setIsShowKeyBoard] = useState(false);
   const [isTextInputLogin, setTextInputLogin] = useState(false);
-  const [isTextInputPassword, setTextInputPassword] = useState(false);
   const [isTextInputEmail, setTextInputEmail] = useState(false);
+  const [isTextInputPassword, setTextInputPassword] = useState(false);
   const [showPassword, setShowPassword] = useState(true);
 
   //   const [isFocus, setIsFocus] = useState({
@@ -79,7 +79,7 @@ const RegistrationScreen = () => {
           <View
             style={{
               ...styles.form,
-              marginBottom: !isShowKeyBoard ? 30 : 0
+              marginBottom: !isShowKeyBoard ? 80 : 0,
             }}
           >
             <View style={styles.wrapperImgstyle}>
@@ -136,7 +136,7 @@ const RegistrationScreen = () => {
                 }}
                 onSubmitEditing={() => setTextInputEmail(true)}
                 onEndEditing={() => setTextInputEmail(false)}
-                  keyboardType="email-address"
+                keyboardType="email-address"
               />
             </View>
 
