@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   StyleSheet,
   View,
@@ -31,21 +31,9 @@ const RegistrationScreen = () => {
   const [isTextInputPassword, setTextInputPassword] = useState(false);
   const [showPassword, setShowPassword] = useState(true);
 
-  //   const [isFocus, setIsFocus] = useState({
-  //     login: false,
-  //     email: false,
-  //     password: false,
-  //   });
-
   const keyBoardHide = () => {
-    setIsShowKeyBoard(true);
+    setIsShowKeyBoard(false);
     Keyboard.dismiss();
-  };
-
-  const handleRegistration = () => {
-    setIsShowKeyBoard(true);
-    Keyboard.dismiss();
-    console.log(state);
     setState(initialState);
   };
 
@@ -79,7 +67,8 @@ const RegistrationScreen = () => {
           <View
             style={{
               ...styles.form,
-              marginBottom: !isShowKeyBoard ? 80 : 0,
+              marginBottom: isShowKeyBoard ? 40 : 0,
+              //   width: dimensions,
             }}
           >
             <View style={styles.wrapperImgstyle}>
@@ -176,7 +165,7 @@ const RegistrationScreen = () => {
             <TouchableOpacity
               activeOpacity={0.9}
               style={styles.button}
-              onPress={handleRegistration}
+              onPress={keyBoardHide}
             >
               <Text style={styles.btnTitle}>Зарегистрироваться</Text>
             </TouchableOpacity>

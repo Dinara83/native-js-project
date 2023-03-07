@@ -29,10 +29,10 @@ const LoginScreen = () => {
   const [isTextInputPassword, setTextInputPassword] = useState(false);
   const [showPassword, setShowPassword] = useState(true);
 
-
   const keyBoardHide = () => {
     setIsShowKeyBoard(false);
     Keyboard.dismiss();
+    setState(initialState);
   };
 
   const newLocalRobotoRegular = "../fonts/Roboto-Regular.ttf";
@@ -74,8 +74,7 @@ const LoginScreen = () => {
                 style={{
                   ...styles.input,
                   marginTop: 16,
-                  borderColor:
-				  isTextInputEmail == true ? `#FF6C00` : `#E8E8E8`,
+                  borderColor: isTextInputEmail == true ? `#FF6C00` : `#E8E8E8`,
                 }}
                 placeholder="Адрес электронной почты"
                 value={state.email}
@@ -83,10 +82,10 @@ const LoginScreen = () => {
                   setState((prevState) => ({ ...prevState, email: value }))
                 }
                 onFocus={() => {
-					setTextInputEmail(true);
-					setIsShowKeyBoard(true);
-				  }}
-				  onSubmitEditing={() => setTextInputEmail(true)}
+                  setTextInputEmail(true);
+                  setIsShowKeyBoard(true);
+                }}
+                onSubmitEditing={() => setTextInputEmail(true)}
                 onEndEditing={() => setTextInputEmail(false)}
                 keyboardType="email-address"
               />
@@ -98,7 +97,7 @@ const LoginScreen = () => {
                   ...styles.input,
                   marginTop: 16,
                   borderColor:
-				  isTextInputPassword == true ? `#FF6C00` : `#E8E8E8`,
+                    isTextInputPassword == true ? `#FF6C00` : `#E8E8E8`,
                 }}
                 secureTextEntry={showPassword}
                 placeholder="Пароль"
@@ -110,10 +109,10 @@ const LoginScreen = () => {
                   }))
                 }
                 onFocus={() => {
-					setTextInputPassword(true);
-					setIsShowKeyBoard(true);
-				  }}
-				  onSubmitEditing={() => setTextInputPassword(true)}
+                  setTextInputPassword(true);
+                  setIsShowKeyBoard(true);
+                }}
+                onSubmitEditing={() => setTextInputPassword(true)}
                 onEndEditing={() => setTextInputPassword(false)}
               />
               <TouchableOpacity
@@ -125,7 +124,11 @@ const LoginScreen = () => {
               </TouchableOpacity>
             </View>
 
-            <TouchableOpacity activeOpacity={0.9} style={styles.button}>
+            <TouchableOpacity
+              activeOpacity={0.9}
+              style={styles.button}
+              onPress={keyBoardHide}
+            >
               <Text style={styles.btnTitle}>Войти</Text>
             </TouchableOpacity>
 
