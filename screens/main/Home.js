@@ -1,18 +1,19 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { StyleSheet, View, Text } from "react-native";
+// import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-const MainTab = createBottomTabNavigator();
+// const MainTab = createBottomTabNavigator();
 
 import PostsScreen from "./PostsScreen";
 
 const Home = () => {
   return (
     <View style={styles.container}>
-      <MainTab.Screen
+      <Text>Home</Text>
+      {/* <MainTab.Screen
         name="PostsScreen"
         component={PostsScreen}
-      ></MainTab.Screen>
+      ></MainTab.Screen> */}
     </View>
   );
 };
