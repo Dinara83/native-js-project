@@ -1,29 +1,11 @@
 // @ts-nocheck
+import "react-native-gesture-handler";
 import React from "react";
-import { StatusBar } from "expo-status-bar";
-import { ImageBackground, StyleSheet, View } from "react-native";
-import RegistrationScreen from "./Screens/RegistrationScreen";
-// import LoginScreen from "./Screens/LoginScreen";
+
+import { NavigationContainer } from "@react-navigation/native";
+import { useRoute } from "./router";
 
 export default function App() {
-  return (
-    <View style={{ width: "100%", height: "100%" }}>
-      <ImageBackground
-        source={require("./assets/images/background-photo.png")}
-        style={styles.image}
-      >
-        <RegistrationScreen />
-        {/* <LoginScreen /> */}
-        <StatusBar style="auto" />
-      </ImageBackground>
-    </View>
-  );
+  const routing = useRoute(null);
+  return <NavigationContainer>{routing}</NavigationContainer>;
 }
-
-const styles = StyleSheet.create({
-  image: {
-    flex: 1,
-    resizeMode: "cover",
-    // justifyContent: "flex-end",
-  },
-});
