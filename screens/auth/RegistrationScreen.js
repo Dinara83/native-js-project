@@ -1,18 +1,17 @@
 // @ts-nocheck
-import "react-native-gesture-handler";
 import React, { useState, useCallback } from "react";
 import {
   StyleSheet,
   View,
   Text,
+  Image,
+  ImageBackground,
   TextInput,
   TouchableOpacity,
   KeyboardAvoidingView,
   Platform,
-  Image,
-  TouchableWithoutFeedback,
   Keyboard,
-  ImageBackground,
+  TouchableWithoutFeedback,
 } from "react-native";
 
 const initialState = {
@@ -27,7 +26,6 @@ import * as SplashScreen from "expo-splash-screen";
 SplashScreen.preventAutoHideAsync();
 
 const RegistrationScreen = ({ navigation }) => {
-  console.log("novigation: ", novigation);
   const [state, setState] = useState(initialState);
   const [isShowKeyBoard, setIsShowKeyBoard] = useState(false);
   const [isTextInputLogin, setTextInputLogin] = useState(false);
@@ -69,27 +67,23 @@ const RegistrationScreen = ({ navigation }) => {
           style={styles.image}
         >
           <KeyboardAvoidingView
-            behavior={Platform.OS == "ios" ? "padding" : "height"}
+            behavior={Platform.OS == "ios" ? "padding" : ""}
             onLayout={onLayoutRootView}
           >
             <View
               style={{
                 ...styles.form,
-                marginBottom: isShowKeyBoard ? 20 : 0,
+                marginBottom: isShowKeyBoard ? 30 : 0,
               }}
             >
               <View style={styles.wrapperImgstyle}>
                 <View style={styles.ellipse}>
                   <Image
                     style={styles.imgPlus}
-                    // @ts-ignore
                     source={require("../../assets/images/union.png")}
                   />
                 </View>
-                <Image
-                  source={require(// @ts-ignore
-                  "../../assets/images/add-photo.png")}
-                />
+                <Image source={require("../../assets/images/add-photo.png")} />
               </View>
               <View style={styles.header}>
                 <Text style={styles.headerTitle}>Регистрация</Text>

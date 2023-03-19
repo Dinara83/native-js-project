@@ -16,7 +16,8 @@ import ProfileScreen from "./screens/main/ProfileScreen";
 // icons import
 import { AntDesign, Feather } from "@expo/vector-icons";
 
-export const useRoute = (isAuth) => {
+const useRoute = (isAuth) => {
+  //   console.log(isAuth);
   if (!isAuth) {
     return (
       <AuthStack.Navigator>
@@ -36,8 +37,7 @@ export const useRoute = (isAuth) => {
   return (
     <MainTab.Navigator
       screenOptions={{
-        tabBarShowLabel: true,
-        tabBarAndroidRipple: { borderless: false },
+        tabBarShowLabel: false,
       }}
     >
       <MainTab.Screen
@@ -76,3 +76,5 @@ export const useRoute = (isAuth) => {
     </MainTab.Navigator>
   );
 };
+
+export default useRoute;

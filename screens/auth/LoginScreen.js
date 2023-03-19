@@ -1,5 +1,4 @@
 // @ts-nocheck
-import "react-native-gesture-handler";
 import React, { useState, useCallback } from "react";
 import {
   StyleSheet,
@@ -24,8 +23,7 @@ import * as SplashScreen from "expo-splash-screen";
 
 SplashScreen.preventAutoHideAsync();
 
-const LoginScreen = ({ novigation }) => {
-  console.log("novigation: ", novigation);
+const LoginScreen = ({ navigation }) => {
   const [state, setState] = useState(initialState);
   const [isShowKeyBoard, setIsShowKeyBoard] = useState(false);
   const [isTextInputEmail, setTextInputEmail] = useState(false);
@@ -66,11 +64,11 @@ const LoginScreen = ({ novigation }) => {
           style={styles.image}
         >
           <KeyboardAvoidingView
-            behavior={Platform.OS == "ios" ? "padding" : "height"}
+            behavior={Platform.OS == "ios" ? "padding" : ""}
             onLayout={onLayoutRootView}
           >
             <View
-              style={{ ...styles.form, marginBottom: isShowKeyBoard ? 20 : 0 }}
+              style={{ ...styles.form, marginBottom: isShowKeyBoard ? 0 : 75 }}
             >
               <View style={styles.headerExit}>
                 <Text style={styles.headerTitleExit}>Войти</Text>
