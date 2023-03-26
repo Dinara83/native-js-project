@@ -68,7 +68,10 @@ const LoginScreen = ({ navigation }) => {
             onLayout={onLayoutRootView}
           >
             <View
-              style={{ ...styles.form, marginBottom: isShowKeyBoard ? 0 : 75 }}
+              style={{
+                ...styles.form,
+                paddingBottom: isTextInputEmail || isTextInputPassword ? 30 : 0,
+              }}
             >
               <View style={styles.headerExit}>
                 <Text style={styles.headerTitleExit}>Войти</Text>
@@ -158,20 +161,21 @@ const LoginScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-
-  image: {
-    flex: 1,
     resizeMode: "cover",
     justifyContent: "flex-end",
   },
 
+  image: {
+    flex: 1,
+  },
+
   form: {
+    flex: 0.6,
     backgroundColor: "#fff",
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
     paddingTop: 32,
-    height: 489,
+    // height: 489,
     paddingHorizontal: 16,
   },
 
@@ -245,7 +249,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 19,
     color: `#1B4371`,
-    paddingBottom: 0,
   },
 });
 

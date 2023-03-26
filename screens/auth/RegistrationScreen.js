@@ -73,7 +73,10 @@ const RegistrationScreen = ({ navigation }) => {
             <View
               style={{
                 ...styles.form,
-                marginBottom: isShowKeyBoard ? 30 : 0,
+                paddingBottom:
+                  isTextInputEmail || isTextInputPassword || isTextInputPassword
+                    ? 30
+                    : 0,
               }}
             >
               <View style={styles.wrapperImgstyle}>
@@ -193,21 +196,21 @@ const RegistrationScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-
-  image: {
-    flex: 1,
     resizeMode: "cover",
     justifyContent: "flex-end",
   },
 
+  image: {
+    flex: 1,
+  },
+
   form: {
-    // flex: 0.7,
+    flex: 0.7,
     backgroundColor: "#fff",
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
     paddingTop: 60,
-    height: 549,
+    // height: 549,
     paddingHorizontal: 16,
   },
 
