@@ -67,16 +67,16 @@ const RegistrationScreen = ({ navigation }) => {
           style={styles.image}
         >
           <KeyboardAvoidingView
-            behavior={Platform.OS == "ios" ? "padding" : ""}
+            behavior={Platform.OS == "ios" ? "padding" : "height"}
             onLayout={onLayoutRootView}
           >
             <View
               style={{
                 ...styles.form,
-                paddingBottom:
-                  isTextInputEmail || isTextInputPassword || isTextInputPassword
-                    ? 30
-                    : 0,
+                marginBottom: !isShowKeyBoard
+                  ? //   isTextInputEmail || isTextInputPassword || isTextInputPassword
+                    30
+                  : 0,
               }}
             >
               <View style={styles.wrapperImgstyle}>
@@ -171,7 +171,10 @@ const RegistrationScreen = ({ navigation }) => {
               <TouchableOpacity
                 activeOpacity={0.9}
                 style={styles.button}
-                onPress={keyBoardHide}
+                onPress={() => {
+                  handleSubmit();
+                  navigation.navigate("Home");
+                }}
               >
                 <Text style={styles.btnTitle}>Зарегистрироваться</Text>
               </TouchableOpacity>
@@ -196,21 +199,20 @@ const RegistrationScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    resizeMode: "cover",
-    justifyContent: "flex-end",
   },
 
   image: {
     flex: 1,
+    resizeMode: "cover",
+    justifyContent: "flex-end",
   },
 
   form: {
-    flex: 0.7,
     backgroundColor: "#fff",
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
     paddingTop: 60,
-    // height: 549,
+    height: 549,
     paddingHorizontal: 16,
   },
 

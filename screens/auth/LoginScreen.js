@@ -33,6 +33,11 @@ const LoginScreen = ({ navigation }) => {
   const keyBoardHide = () => {
     setIsShowKeyBoard(false);
     Keyboard.dismiss();
+  };
+
+  const handleSubmit = () => {
+    setIsShowKeyBoard(false);
+    Keyboard.dismiss();
     setState(initialState);
   };
 
@@ -64,13 +69,16 @@ const LoginScreen = ({ navigation }) => {
           style={styles.image}
         >
           <KeyboardAvoidingView
-            behavior={Platform.OS == "ios" ? "padding" : ""}
+            behavior={Platform.OS == "ios" ? "padding" : "height"}
             onLayout={onLayoutRootView}
           >
             <View
               style={{
                 ...styles.form,
-                paddingBottom: isTextInputEmail || isTextInputPassword ? 30 : 0,
+                marginBottom: !isShowKeyBoard
+                  ? // isTextInputEmail || isTextInputPassword
+                    30
+                  : 0,
               }}
             >
               <View style={styles.headerExit}>
@@ -136,7 +144,10 @@ const LoginScreen = ({ navigation }) => {
               <TouchableOpacity
                 activeOpacity={0.9}
                 style={styles.button}
-                onPress={keyBoardHide}
+                onPress={() => {
+                  handleSubmit();
+                  navigation.navigate("Home");
+                }}
               >
                 <Text style={styles.btnTitle}>Войти</Text>
               </TouchableOpacity>
@@ -161,21 +172,20 @@ const LoginScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    resizeMode: "cover",
-    justifyContent: "flex-end",
   },
 
   image: {
     flex: 1,
+    resizeMode: "cover",
+    justifyContent: "flex-end",
   },
 
   form: {
-    flex: 0.6,
     backgroundColor: "#fff",
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
     paddingTop: 32,
-    // height: 489,
+    height: 489,
     paddingHorizontal: 16,
   },
 
