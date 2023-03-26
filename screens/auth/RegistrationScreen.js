@@ -1,5 +1,6 @@
 // @ts-nocheck
-import React, { useState, useCallback } from "react";
+import React, { useState } from "react";
+import onLayoutRootView from "../../App";
 import {
   StyleSheet,
   View,
@@ -20,11 +21,6 @@ const initialState = {
   password: "",
 };
 
-import { useFonts } from "expo-font";
-import * as SplashScreen from "expo-splash-screen";
-
-SplashScreen.preventAutoHideAsync();
-
 const RegistrationScreen = ({ navigation }) => {
   const [state, setState] = useState(initialState);
   const [isShowKeyBoard, setIsShowKeyBoard] = useState(false);
@@ -39,26 +35,6 @@ const RegistrationScreen = ({ navigation }) => {
     setState(initialState);
   };
 
-  const newLocalRobotoRegular = "../../fonts/Roboto-Regular.ttf";
-  const newLocalRobotoBold = "../../fonts/Roboto-Bold.ttf";
-  const newLocalRobotoMedium = "../../fonts/Roboto-Medium.ttf";
-
-  const [fontsLoaded] = useFonts({
-    "Roboto-Regular": require(newLocalRobotoRegular),
-    "Roboto-Bold": require(newLocalRobotoBold),
-    "Roboto-Medium": require(newLocalRobotoMedium),
-  });
-
-  const onLayoutRootView = useCallback(async () => {
-    if (fontsLoaded) {
-      await SplashScreen.hideAsync();
-    }
-  }, [fontsLoaded]);
-
-  if (!fontsLoaded) {
-    return null;
-  }
-
   return (
     <TouchableWithoutFeedback onPress={keyBoardHide}>
       <View style={styles.container}>
@@ -67,16 +43,16 @@ const RegistrationScreen = ({ navigation }) => {
           style={styles.image}
         >
           <KeyboardAvoidingView
-            behavior={Platform.OS == "ios" ? "padding" : "height"}
+            behavior={Platform.OS == "ios" ? "padding" : ""}
             onLayout={onLayoutRootView}
           >
             <View
               style={{
                 ...styles.form,
-                marginBottom: !isShowKeyBoard
+                paddingBottom: !isShowKeyBoard
                   ? //   isTextInputEmail || isTextInputPassword || isTextInputPassword
-                    30
-                  : 0,
+                    0
+                  : 10,
               }}
             >
               <View style={styles.wrapperImgstyle}>
